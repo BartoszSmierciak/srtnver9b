@@ -122,6 +122,8 @@ void ModbusClose(void);
 
 int GetPosition(int slaveAddress, uint32_t *reg32);
 
+
+int GetRegister(int slaveAddress, const uint16_t regAddress, uint32_t *reg16);
 /*!
 * Get encoder reverse state.
 * Read 8 bit (MSB 0xF000) register of reverse state.
@@ -130,9 +132,9 @@ int GetPosition(int slaveAddress, uint32_t *reg32);
 * \param slaveAddress The node adress of the encoder
 * \return Reverse state on success
 */
-int GetPositionH(int slaveAddress);
+int GetPositionH(int slaveAddress, uint32_t *reg16);
 
-int GetPositionL(int slaveAddress);
+int GetPositionL(int slaveAddress, uint32_t *reg16);
 
 int GetSTAngle(int slaveAddress, double *angle);
 

@@ -1,5 +1,5 @@
 #!/bin/bash
-CFLAGS=`pkg-config gtk+-2.0 --cflags` `pkg-config --cflags --libs libmodbus`
+CFLAGS=`pkg-config gtk+-2.0 --cflags`
 LIBS=`pkg-config gtk+-2.0 --libs`
 # vspectra.c dongle + amd FFT
 # vspectra_pci.c SDAS-4020 + amd FFT
@@ -18,7 +18,7 @@ LIBS=`pkg-config gtk+-2.0 --libs`
 #gcc -W -Wall -O3 $CFLAGS main.c vspectra_pci.c  disp.c plot.c cat.c geom.c time.c outfile.c sport.c map.c cmdfl.c cal.c srthelp.c velspec.c four.c  amdfft.c $LIBS -lm  -lacml /usr/lib/libgfortran.a
 
 # compile for dongle + intel FFT
-gcc -W -DENCODERS -Wall -O3 $CFLAGS main.c vspectra_fftw.c disp.c plot.c cat.c geom.c time.c outfile.c sport.c map.c cmdfl.c cal.c srthelp.c velspec.c four.c  fftw2.c librtlsdr.c tuner_r820t.c encoder.c encoderRegisters.c $LIBS -lm -lfftw3f -lmodbus `pkg-config --libs --cflags libusb-1.0 gtk+-2.0`
+gcc -W -DENCODERS -Wall -O3 $CFLAGS main.c vspectra_fftw.c disp.c plot.c cat.c geom.c time.c outfile.c sport.c map.c cmdfl.c cal.c srthelp.c velspec.c four.c  fftw2.c librtlsdr.c tuner_r820t.c encoder.c encoderRegisters.c $LIBS -lm -lfftw3f `pkg-config --libs --cflags libusb-1.0 gtk+-2.0` -I/opt/libmodbus/include/ -L/opt/libmodbus/lib/ -lmodbus
 
 # compile for DAS-4020 + intel FFT 
 #gcc -W -Wall -O3 $CFLAGS main.c vspectra_pci_fftw.c  disp.c plot.c cat.c geom.c time.c outfile.c sport.c map.c cmdfl.c cal.c srthelp.c velspec.c four.c fftw2.c $LIBS -lm  -lfftw3f

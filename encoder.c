@@ -238,14 +238,14 @@ int GetPosition(int slaveAddress, uint32_t *reg32)
 int GetPositionH(int slaveAddress, uint32_t *reg16)
 {
     int ans;
-    GetRegister(slaveAddress, EncoderRegisters.PositionH, reg16);
+    ans = GetRegister(slaveAddress, EncoderRegisters.PositionH, reg16);
     return ans;
 }
 
 int GetPositionL(int slaveAddress, uint32_t *reg16)
 {
     int ans;
-    GetRegister(slaveAddress, EncoderRegisters.PositionL, reg16);
+    ans = GetRegister(slaveAddress, EncoderRegisters.PositionL, reg16);
     return ans;
 }
 
