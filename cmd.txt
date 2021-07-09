@@ -1,0 +1,12 @@
+: azel 50 25
+:50
+: cal  
+: calibrate
+: Sun b
+: record
+:50
+: roff
+: G160
+:50
+: vplot 
+: stow

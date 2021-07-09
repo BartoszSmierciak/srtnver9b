@@ -1,0 +1,9 @@
+/usr/bin/make -f "/home/bart/Programowanie/RT3/srtnver9/Focuser/Makefile" --dry-run --always-make --keep-going --print-directory
+make: Entering directory '/home/bart/Programowanie/RT3/srtnver9'
+make: Leaving directory '/home/bart/Programowanie/RT3/srtnver9'
+ 
+make: /home/bart/Programowanie/RT3/srtnver9/Focuser/Makefile: No such file or directory
+make: *** No rule to make target '/home/bart/Programowanie/RT3/srtnver9/Focuser/Makefile'.
+make: Failed to remake makefile '/home/bart/Programowanie/RT3/srtnver9/Focuser/Makefile'.
+make: *** No targets specified and no makefile found.  Stop.
+ 

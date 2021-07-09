@@ -1,0 +1,18 @@
+{
+    "files.associations": {
+        "*.tcc": "cpp",
+        "array": "cpp",
+        "bitset": "cpp",
+        "functional": "cpp",
+        "tuple": "cpp",
+        "typeindex": "cpp",
+        "type_traits": "cpp",
+        "ratio": "cpp",
+        "algorithm": "cpp",
+        "random": "cpp",
+        "fstream": "cpp",
+        "istream": "cpp",
+        "ostream": "cpp",
+        "utility": "cpp"
+    }
+}
