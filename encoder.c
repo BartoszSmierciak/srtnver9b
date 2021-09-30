@@ -208,8 +208,13 @@ int Get2Registers(int slaveAddress, const uint16_t regAddressL, const uint16_t r
     *reg32 = (reg32H << 16) | reg32L;
     return 0;
 }
+<<<<<<< HEAD
 /*
 int GetRegister(int slaveAddress, const uint16_t regAddress, uint32_t *reg16)
+=======
+
+/*int GetRegister(int slaveAddress, const uint16_t regAddress, uint16_t *reg16)
+>>>>>>> 1fc433dea014639993d9c6463126db2c95c71edd
 {
     int ans;
     ans = ModbusRead(slaveAddress, regAddress, reg16);
