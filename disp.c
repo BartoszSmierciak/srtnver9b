@@ -245,7 +245,7 @@ void record_tooltip(void)
 
 void button_cmdfl_clicked(void)
 {
-    char txt[80];
+    char txt[300];
     FILE *file1;
     if (d1.debug)
         printf("cmdfl\n");
@@ -285,7 +285,7 @@ void hit_enter_cmdfl(void)
 {
     FILE *file1;
     const gchar *str;
-    char txt[80];
+    char txt[300];
     if (!d1.entry5)
         return;
     str = gtk_entry_get_text(GTK_ENTRY(entry5));

@@ -154,7 +154,7 @@ void vquit()
 void vplot(void)
   // plot the spectrum
 {
-    char txt[80], fnam[80];
+    char txt[300], fnam[280];
     int i, j, k, np, j1, j2, n3, npoint, yr, da, hr, mn, sc;
     double xx, yy, dmax, ddmax, dmin, slope, dd, ddd, totpp, scale, sigma, freq, fstart, fstop, vstart, vstop,
         xoffset;

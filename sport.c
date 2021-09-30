@@ -29,7 +29,7 @@ void azel(double az, double el)
     static int kk;
     double azz, ell, ra, dec, x, y;
     GdkColor color;
-    char str[80], recv[256], txt[80];
+    char str[80], recv[256], txt[300];
     
 
     azz = ell = 0;

@@ -67,7 +67,7 @@ int main(int argc, char *argv[])
     GtkWidget *button_help;
     int i;
     int yr, da, hr, mn, sc;
-    char buf[64];
+    char buf[300];
     FILE *file1; 
     GdkGeometry geometry;
     GdkWindowHints geo_mask;

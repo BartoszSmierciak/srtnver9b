@@ -81,14 +81,14 @@ int catfile(void)
             if (kmatch(buf, "CASSIMOUNT")) 
             {
                 d1.rod = 1;
-                d1.azcounts_per_deg = 8.0 * 32.0 * 60.0 / (360.0 * 9.0);
+                d1.azcounts_per_deg = 8.0 * 32.0 * 60.0 / (360.0 * 9.0);//4,740740741
                 sscanf(buf, "%*s %lf %lf %lf %lf %lf", &d1.rod1, &d1.rod2, &d1.rod3, &d1.rod4, &d1.rod5);
             }
             if (kmatch(buf, "H180MOUNT")) 
             {
                 d1.rod = 0;
-                d1.azcounts_per_deg = (52.0 * 27.0 / 120.0); // for H-180
-                d1.elcounts_per_deg = (52.0 * 27.0 / 120.0); // for H-180
+                d1.azcounts_per_deg = (52.0 * 27.0 / 120.0); // for H-180 motors: 11.7 impulsów 5' 07" min
+                d1.elcounts_per_deg = (52.0 * 27.0 / 120.0); // for H-180 encoders: 182,041666667 20" sec
                 d1.rot2mode = 10; // for old SRT controller
             }
             if (kmatch(buf, "ALFASPID")) 

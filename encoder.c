@@ -208,7 +208,7 @@ int Get2Registers(int slaveAddress, const uint16_t regAddressL, const uint16_t r
     *reg32 = (reg32H << 16) | reg32L;
     return 0;
 }
-
+/*
 int GetRegister(int slaveAddress, const uint16_t regAddress, uint32_t *reg16)
 {
     int ans;
@@ -226,7 +226,7 @@ int GetRegister(int slaveAddress, const uint16_t regAddress, uint32_t *reg16)
     }
     return 0;
 }
-
+*/
 int GetPosition(int slaveAddress, uint32_t *reg32)
 {
     int ans;
@@ -234,7 +234,7 @@ int GetPosition(int slaveAddress, uint32_t *reg32)
     return ans;
 }
 
-
+/*
 int GetPositionH(int slaveAddress, uint32_t *reg16)
 {
     int ans;
@@ -248,7 +248,7 @@ int GetPositionL(int slaveAddress, uint32_t *reg16)
     ans = GetRegister(slaveAddress, EncoderRegisters.PositionL, reg16);
     return ans;
 }
-
+*/
 int GetSTAngle(int slaveAddress, double *angle)
 {
     int ans;

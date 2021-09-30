@@ -30,7 +30,7 @@ double cmdfile(void)
     int i, j, n, line, yr, day, hr, min, se, ss;
     int da, mn, sc;
     int ix, iy;
-    char str[256], txt[256];
+    char str[256], txt[300];//niebezpieczne str zapisujemy do txt + dodatkowe znaki, przeładowanie
     char *p, *k;
     FILE *file1;
     GdkColor color;
