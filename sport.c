@@ -62,8 +62,11 @@ void azel(double az, double el)
     
     #ifdef ENCODERS
     double en_az_pos = 0.0;
+    double en_el_pos = 0.0;
     read_en_az_pos(&en_az_pos);
-    sprintf(txt, "enc %5.1f deg, offset %5.1f ", en_az_pos, (en_az_pos - d1.aznow));
+    read_en_el_pos(&en_el_pos);
+    //sprintf(txt, "enc %5.1f deg, offset %5.1f ", en_az_pos, (en_az_pos - d1.aznow));
+    sprintf(txt, "eAZ %5.1f deg, eEL %5.1f deg, offAZ %5.1f, offEL %5.1f ", en_az_pos, en_el_pos, (en_az_pos - d1.aznow), (en_el_pos - d1.elnow));
     #else
     sprintf(txt, "offsets %5.1f %4.1f deg", d1.azoff, d1.eloff);
     #endif
@@ -334,7 +337,8 @@ void azel(double az, double el)
                     gdk_draw_text(pixmap, fixed_font, drawing_area->style->black_gc, ix, iy, txt, strlen(txt));
                     #ifdef ENCODERS
                     read_en_az_pos(&en_az_pos);
-                    sprintf(txt, "enc %5.1f deg, offset %5.1f ", en_az_pos, (en_az_pos - d1.aznow));
+                    read_en_el_pos(&en_el_pos);
+                    sprintf(txt, "eAZ %5.1f deg, eEL %5.1f deg, offAZ %5.1f, offEL %5.1f ", en_az_pos, en_el_pos, (en_az_pos - d1.aznow), (en_el_pos - d1.elnow));
                     #else
                     sprintf(txt, "offsets %5.1f %4.1f deg", d1.azoff, d1.eloff);
                     #endif
@@ -505,7 +509,9 @@ void azel(double az, double el)
         gdk_draw_text(pixmap, fixed_font, drawing_area->style->black_gc, ix, iy, txt, strlen(txt));
         #ifdef ENCODERS
         read_en_az_pos(&en_az_pos);
-        sprintf(txt, "enc %5.1f deg, offset %5.1f ", en_az_pos, (en_az_pos - d1.aznow));
+        read_en_el_pos(&en_el_pos);
+        sprintf(txt, "eAZ %5.1f deg, eEL %5.1f deg, offAZ %5.1f, offEL %5.1f ", en_az_pos, en_el_pos, (en_az_pos - d1.aznow), (en_el_pos - d1.elnow));
+        //sprintf(txt, "enc %5.1f deg, offset %5.1f ", en_az_pos, (en_az_pos - d1.aznow));
         #else
         sprintf(txt, "offsets %5.1f %4.1f deg", d1.azoff, d1.eloff);
         #endif
