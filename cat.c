@@ -90,6 +90,12 @@ int catfile(void)
                 d1.azcounts_per_deg = (52.0 * 27.0 / 120.0); // for H-180 motors: 11.7 impulsów 5' 07" min
                 d1.elcounts_per_deg = (52.0 * 27.0 / 120.0); // for H-180 encoders: 182,041666667 20" sec
                 d1.rot2mode = 10; // for old SRT controller
+                //As stated above, the motors drive a magnetic disk with twelve poles giving 12 
+                //contact closures per rotation. A sprocket gear with 8 teeth attached to the shaft 
+                //of the motor chain drives a large 54 tooth sprocket gear which in turn drives 
+                //a sector gear of 52 teeth via a worm gear. Thus the number of counts per degree is:
+                //12×54×52/(8×360) = 11.70 (pulses per degree)
+
             }
             if (kmatch(buf, "ALFASPID")) 
             {
