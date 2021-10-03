@@ -608,13 +608,26 @@ int h180(double *az, double *el, int cmd, char *resp)
     int usbdev;
     //status - 
     int status,rstatus,mm,count,axis,i,j,im,ccount;
-    double azz,ell,acount;
+    double azz,ell,acount,lenzero,temp;   // kch dodano lenzero,temp
+
     char command[16],ch;
 
     if(cmd == 1)
     {
         azz = d1.azcount / d1.azcounts_per_deg;
-        ell = d1.elcount / d1.elcounts_per_deg;
+        // kch bledne: ell = d1.elcount / d1.elcounts_per_deg;
+        lenzero = d1.rod1 * d1.rod1 + d1.rod2 * d1.rod2
+            - 2.0 * d1.rod1 * d1.rod2 * cos((d1.rod4 - d1.ellim1) * PI / 180.0) - d1.rod3 * d1.rod3;
+        if (lenzero >= 0.0)
+            lenzero = sqrt(lenzero);
+        else
+            lenzero = 0;
+        temp = lenzero - d1.elcount/d1.rod5;
+        temp = (d1.rod1*d1.rod1 + d1.rod2*d1.rod2 - d1.rod3*d1.rod3 - temp*temp) 
+            / (2.0*d1.rod1*d1.rod2);
+        ell = -acos(temp) * 180/PI + d1.rod4 - d1.ellim1; // usuwalem ellim1 kch
+        // kch koniec wstawki CASSI
+
         *az = azz + d1.azlim1;
         *el = ell + d1.ellim1;
         return 0;
@@ -660,7 +673,24 @@ int h180(double *az, double *el, int cmd, char *resp)
         }
         if(axis==1) 
         {
-            acount = ell * d1.elcounts_per_deg - d1.elcount;
+            //acount = ell * d1.elcounts_per_deg - d1.elcount;
+            //  kch bledne bylo: acount = ell * d1.elcounts_per_deg - d1.elcount; trzeba liczyc w tel frame
+            lenzero = d1.rod1 * d1.rod1 + d1.rod2 * d1.rod2
+                - 2.0 * d1.rod1 * d1.rod2 * cos((d1.rod4 - d1.ellim1) * PI / 180.0) - d1.rod3 * d1.rod3;
+            if (lenzero >= 0.0)
+                lenzero = sqrt(lenzero);
+            else
+                lenzero = 0;
+            acount = d1.rod1 * d1.rod1 + d1.rod2 * d1.rod2 - 2.0 * d1.rod1 * d1.rod2 * cos((d1.rod4 - (ell+d1.ellim1))
+                * PI / 180.0) - d1.rod3 * d1.rod3;
+            if (acount >= 0.0)
+                acount = (-sqrt(acount) + lenzero) * d1.rod5;
+            else
+                acount = 0;
+            acount = acount - d1.elcount;
+            if(d1.debug)  printf("move el axis=1 acount %f ell %f d1.elcount %d lenzero %f d1.ellim1 %f\n",acount,ell,d1.elcount,lenzero,d1.ellim1);
+            // kch koniec wstawki dla CASSI
+
             if(d1.countperstep && acount > d1.countperstep) 
                 acount = d1.countperstep;
             if(d1.countperstep && acount < -d1.countperstep)
@@ -752,3 +782,4 @@ int h180(double *az, double *el, int cmd, char *resp)
     //sleep(2);
     return 0;
 }
+

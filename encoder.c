@@ -265,12 +265,12 @@ int GetSTAngle(int slaveAddress, double *angle)
 
 int read_en_az_pos(double *az)
 {   
-    return GetSTAngle(127, az);
+    return GetSTAngle(126, az);
 }
 
 int read_en_el_pos(double *el)
 {
-    return GetSTAngle(126, el);
+    return GetSTAngle(127, el);
 }
 /*
 angle Angles(double STAngle)
