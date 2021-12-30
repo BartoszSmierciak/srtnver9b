@@ -18,7 +18,7 @@
                 "/usr/include/modbus",
                 "${workspaceFolder}/**"
             ],
-            "defines": [],
+            "defines": ["ENCODERS"],
             "compilerPath": "/usr/bin/gcc",
             "cStandard": "c11",
             "cppStandard": "c++17",
@@ -27,7 +27,9 @@
                 "-lm",
                 "-lfftw3f",
                 "-lglib-2.0",
-            "-O0"            ]
+                "-O0",
+                "-fdump-tree-all-graph"      
+              ]
         }
     ],
     "version": 4

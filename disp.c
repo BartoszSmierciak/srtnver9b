@@ -29,7 +29,7 @@ void button_stow_clicked(void)
     soutrack[0] = 0;
     d1.bsw = 0;
     d1.scan = 0; 
-    d1.stow = 1; //jazda do stow?
+    d1.stow = 1; //jazda do stow
 }
 
 void button_azel_clicked(void)

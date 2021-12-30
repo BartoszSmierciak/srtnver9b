@@ -101,7 +101,7 @@ int ModbusInit(const char *device, int baud, char parity, int data_bit, int stop
     ctx = modbus_new_rtu(device, baud, parity, data_bit, stop_bit);
     if (modbus_connect(ctx) == -1)
     {
-        //fprintf(stderr, "Connection failed: %s\n", modbus_strerror(errno));
+        fprintf(stderr, "Connection failed: %s\n", modbus_strerror(errno));
         modbus_close(ctx);
         modbus_free(ctx);
         return -1;
@@ -262,6 +262,30 @@ int GetSTAngle(int slaveAddress, double *angle)
     
     return ans;
 }
+int Set_en_az_zero(double *en_az_offset, double *en_az_stow)
+{
+    read_en_el_pos(en_az_offset);
+    *en_az_offset += *en_az_stow;
+    return 0;
+}
+
+int Set_en_el_zero(double *en_el_offset, double *en_el_stow)
+{
+    read_en_el_pos(en_el_offset);
+    *en_el_offset += *en_el_stow;
+    return 0;
+}
+int read_en_az_cal(double *en_az_curr, double *en_az_offset)
+{
+    read_en_az_pos(en_az_curr);
+    *en_az_curr += *en_az_offset;
+}
+
+int read_en_el_cal(double *en_el_curr, double *en_el_offset)
+{
+    read_en_az_pos(en_el_curr);
+    *en_el_curr += *en_el_offset;
+}
 
 int read_en_az_pos(double *az)
 {   
@@ -272,6 +296,8 @@ int read_en_el_pos(double *el)
 {
     return GetSTAngle(127, el);
 }
+
+
 /*
 angle Angles(double STAngle)
 {

@@ -29,7 +29,7 @@ void azel(double az, double el)
     static int kk;
     double azz, ell, ra, dec, x, y;
     GdkColor color;
-    char str[80], recv[256], txt[300];
+    char str[80], recv[256], txt[300]; 
     
 
     azz = ell = 0;
@@ -78,9 +78,18 @@ void azel(double az, double el)
 
     if(d1.ellim2 > 90.0) 
     {  // to support going over 90 deg
-       if(az < d1.azlim2 - 180.0) {az += 180.0; el = 180.0 - el;}
-       if(az > d1.azlim1 + 180.0) {az += -180.0; el = 180.0 - el;}
-       if(d1.debug && el > 90.0)  printf("antenna el over 90 deg az %f el %f\n",az,el);
+        if(az < d1.azlim2 - 180.0) 
+        {
+           az += 180.0; 
+           el = 180.0 - el;
+        }
+        if(az > d1.azlim1 + 180.0) 
+        {
+           az += -180.0; 
+           el = 180.0 - el;
+        }
+        if(d1.debug && el > 90.0)  
+            printf("antenna el over 90 deg az %f el %f\n",az,el);
     }
     azz = az;
     ell = el;
@@ -171,6 +180,7 @@ void azel(double az, double el)
             gdk_draw_text(pixmap, fixed_font, drawing_area->style->black_gc, ixe, iy, txt, strlen(txt));
         }
     }
+    //jeśli współrzędne sa poza zakresem
     if (((az < d1.azlim1 || az > d1.azlim2 || el < d1.ellim1 || el > d1.ellim2) && d1.south)
        || (((az < d1.azlim1 && az > d1.azlim2-360.0) || el < d1.ellim1 || el > d1.ellim2) && !d1.south)) 
     {
@@ -212,8 +222,11 @@ void azel(double az, double el)
         }
         return;
     }
+    //jeśli az lub el są większe od 1. Kiedy track = -1?
     if ((fabs(d1.aznow - d1.azcmd) > 1.0 || fabs(d1.elnow - d1.elcmd) > 1.0) && d1.track != -1) 
     {
+        //niepotrzebne ponowne sprawdzenie dwóch pierwszych warunków, 
+        //kiedy stow = -1?
         if ((fabs(d1.aznow - d1.azcmd) > 1.0 || fabs(d1.elnow - d1.elcmd) > 1.0) && d1.stow != -1) 
         {
             d1.slew = 1;
@@ -508,8 +521,7 @@ void azel(double az, double el)
         iy = midy * 0.15;
         gdk_draw_text(pixmap, fixed_font, drawing_area->style->black_gc, ix, iy, txt, strlen(txt));
         #ifdef ENCODERS
-        read_en_az_pos(&en_az_pos);
-        read_en_el_pos(&en_el_pos);
+
         sprintf(txt, "eAZ %5.1f deg, eEL %5.1f deg, offAZ %5.1f, offEL %5.1f ", en_az_pos, en_el_pos, (en_az_pos - d1.aznow), (en_el_pos - d1.elnow));
         //sprintf(txt, "enc %5.1f deg, offset %5.1f ", en_az_pos, (en_az_pos - d1.aznow));
         #else

@@ -16,7 +16,7 @@
 #include "d1proto.h"
 #include "d1typ.h"
 
-
+//#define ENCODERS
 //************************ encoders *************
 #ifdef ENCODERS
 #include "encoder.h"
@@ -60,6 +60,7 @@ int midx, midy;
 int main(int argc, char *argv[])
 {
     #ifdef ENCODERS
+    //Encoders transmission parameters
     ModbusInit("/dev/ttyUSB0",57600,'E',8,1);
     #endif
     GtkWidget *window; 
@@ -175,11 +176,19 @@ int main(int argc, char *argv[])
 
     //****************** encoders *****************
     #ifdef ENCODERS
-    d1.en_az = d1.stowaz;
-    d1.en_el = d1.stowel;
-    //  poczatkowy offset enkodera w stopniach
-    d1.en_az_offset = 0;
-    d1.en_el_offset = 0;
+
+    //odczyt enkoderow
+    double en_az_curr = 0.0;
+    double en_el_curr = 0.0;
+    //zerowanie położeń enkoderów przez ustawienie offsetu
+    //zammiast d1.stowaz i d1.stowel można użyć dowolnych 
+    //znanych współrzednych na które ustawiony jest teleskop
+    Set_en_az_zero(&d1.en_az_offset, &d1.stowaz);
+    Set_en_el_zero(&d1.en_el_offset, &d1.stowel);
+    //odczyt aktualnej pozycji enkoderow z uwzglednieniem offsetu
+    read_en_az_cal(&en_az_curr, &d1.en_az_offset);
+    read_en_el_cal(&en_el_curr, &d1.en_el_offset);
+
     #endif
     //****************** encoders *****************
     
